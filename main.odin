@@ -64,7 +64,7 @@ rotate_triangle :: proc(triangle: ^Triangle) {
 
 	for i in 0 ..< len(triangle.vectors) {
 		translated_vector := triangle.vectors[i] - centroid
-		rotated_vector := rotate_clockwise(translated_vector, triangle.angle)
+		rotated_vector := rotate(translated_vector, triangle.angle)
 		retranslated_vector := rotated_vector + centroid
 		triangle.vectors[i] = retranslated_vector
 	}
@@ -76,7 +76,7 @@ get_centroid :: proc(v1: rl.Vector2, v2: rl.Vector2, v3: rl.Vector2) -> rl.Vecto
 	return (v1 + v2 + v3) / 3
 }
 
-rotate_clockwise :: proc(point: rl.Vector2, deg: f32) -> rl.Vector2 {
+rotate :: proc(point: rl.Vector2, deg: f32) -> rl.Vector2 {
 	radians := math.to_radians_f32(deg)
 
 	rotated_x := point[0] * math.cos_f32(radians) + point[1] * math.sin_f32(radians)
